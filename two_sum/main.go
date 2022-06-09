@@ -31,10 +31,11 @@ func twoSum(nums []int, target int) []int {
 	for i, num := range nums {
 		difference := target - num
 
-		// Is the difference in the map?
+		// Is the difference (key) in the map?
 		d, ok := m[difference]
 		if ok {
-			// Return the index of 'difference' in nums and the index as a slice.
+			// Return the key-index of 'difference' in nums and the index as a
+			// slice.
 			return []int{d, i}
 		}
 		// !ok add the value (i) to the map at key (num)
