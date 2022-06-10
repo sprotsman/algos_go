@@ -20,11 +20,6 @@ func main() {
 	s := "anagram"
 	t := "nagaram"
 	// Output: true
-
-	if len(s) != len(t) {
-		return
-	}
-
 	fmt.Println(isAnagram(s, t))
 	fmt.Println(isAnagram2(s, t))
 
@@ -34,9 +29,17 @@ func main() {
 	// Output: false
 	fmt.Println(isAnagram(s, t))
 	fmt.Println(isAnagram2(s, t))
+
+	// Example 3:
+	s = "stop"
+	t = "pots"
+	fmt.Println(isAnagram3(s, t))
 }
 
 func isAnagram(s string, t string) bool {
+	if len(s) != len(t) {
+		return false
+	}
 	if sortString(s) == sortString(t) {
 		return true
 	}
@@ -44,7 +47,40 @@ func isAnagram(s string, t string) bool {
 }
 
 func isAnagram2(s string, t string) bool {
+	if len(s) != len(t) {
+		return false
+	}
+
 	return strings.Contains(sortString(s), sortString(t))
+}
+
+func isAnagram3(s string, t string) bool {
+	if len(s) != len(t) {
+		return false
+	}
+
+	m := make(map[rune]int)
+
+	// fmt.Println("m:", m)
+
+	// if value doesn't exist, add (increment (1)) to key in map
+	for _, v := range s {
+		m[v]++
+	}
+
+	// if value does exist, decrement the key's value in map
+	for _, v := range t {
+		m[v]--
+	}
+
+	// if key's values in map are not all 0, return false
+	for k, _ := range m {
+		if m[k] != 0 {
+			return false
+		}
+	}
+
+	return true
 }
 
 func sortString(s string) string {
